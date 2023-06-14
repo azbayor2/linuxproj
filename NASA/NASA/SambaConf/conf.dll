@@ -1,0 +1,12 @@
+
+#!@#
+[input1]
+  comment = input2
+  path = input3
+  guest ok = no
+  browseable = yes
+  create mask = 0777
+  directory mask = 0777
+  writable = yes
+  read only = no
+  

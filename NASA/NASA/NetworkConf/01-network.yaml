@@ -1,0 +1,10 @@
+network:
+ version: 2
+ renderer: NetworkManager
+ ethernets: 
+  ens33:
+   addresses:
+    - 
+   nameservers:
+    addresses: [, ]
+

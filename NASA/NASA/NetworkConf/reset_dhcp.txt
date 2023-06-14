@@ -1,0 +1,8 @@
+network:
+ version: 2
+ renderer: NetworkManager
+ ethernets:
+  network_interface:
+   dhcp4: true
+
+

@@ -1,0 +1,29 @@
+사용 설명서
+
+
+###주의: 실험할 때 꼭!! 작업 디렉토리를 해당 폴더로 설정!
+
+#최종적으로는 파일의 경로 바꾸기 (smb.conf 파일, 나머지 파일 상대경로로
+
+
+cleartmp.sh : 중간중간에 만들어진 .tmp (임시) 파일들을 제거함
+
+
+conf.dll : /etc/samba/samba.conf 에 추가할 내용이 있음
+
+
+listdrive.sh : USB 의 목록을 검색해서 dlist2.tmp, mntpoint.tmp 에 저장함
+
+
+searchlist.sh : 프로그램을 통해서 만든 모든 SAMBA 구성 설정의 행번호를
+                slist.tmp   행 번호에 해당하는 SAMBA 설정의 이름을 
+                show.tmp 에 저장함.
+
+
+smb.conf : 연습파일
+
+
+smbadd.sh : smb.conf에 구성 설정을 추가함
+
+
+smbdel.conf : smb.conf에 구설 설정을 삭제함

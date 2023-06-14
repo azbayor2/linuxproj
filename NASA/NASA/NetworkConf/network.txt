@@ -1,0 +1,10 @@
+network:
+ version: 2
+ renderer: NetworkManager
+ intf_type: 
+  name_of_interface:
+   addresses:
+    - ip_addresses
+   nameservers:
+    addresses: [DNS1, DNS2]
+
