@@ -6,23 +6,23 @@ main.out : $(objfiles)
 	gcc -g -o main.out $^ $(curses)
 
 
-main.o : main.c main.h
+main.o : main.c
 	gcc -c -g $^ $(curses)
 
 
-network.o : network.c main.h
+network.o : network.c
 	gcc -c -g $^ $(curses)
 
 
-samba.o : samba.c main.h
+samba.o : samba.c
 	gcc -c -g $^ $(curses)
 
 
-panel.o : panel.c main.h
+panel.o : panel.c
 	gcc -c -g $^ $(curses)
 
 
-user.o : user.c main.h
+user.o : user.c
 	gcc -c -g $^ $(curses)
 
 

@@ -2,8 +2,8 @@
 
 char *user_choices[] = {"Add User", "Delete User", "Return"};
 
-PANEL *panel3;
-PANEL *panel4;
+PANEL *panel7;
+PANEL *panel8;
 
 
 void adduser();
@@ -38,8 +38,8 @@ void user_menu()
 	post_menu(menu);
 	wrefresh(user_win);
 	
-	panel3 = new_panel(user_name);
-	panel4 = new_panel(user_win);
+	panel7 = new_panel(user_name);
+	panel8 = new_panel(user_win);
 
 	int input;
 	
@@ -66,13 +66,13 @@ void user_menu()
 
 			if(selected == items[0])
 			{
-				hidemenu(panel3);
-				hidemenu(panel4);
+				hidemenu(panel7);
+				hidemenu(panel8);
 
 				adduser();
 
-				showmenu(panel3);
-				showmenu(panel4);
+				showmenu(panel7);
+				showmenu(panel8);
 
 				wrefresh(user_win);
 
@@ -83,13 +83,13 @@ void user_menu()
 			else if(selected == items[1])
 			{
 				
-				hidemenu(panel3);
-                               hidemenu(panel4);
+				hidemenu(panel7);
+                               hidemenu(panel8);
 
                                deluser();
 
-                               showmenu(panel3);
-                               showmenu(panel4);
+                               showmenu(panel7);
+                               showmenu(panel8);
 
                                wrefresh(user_win);
 

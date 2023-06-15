@@ -2,8 +2,8 @@
 
 char *samba_choices[] = {"Add SAMBA", "Edit SAMBA", "Delete SAMBA", "SAMBA User Settings", "Return"};
 
-PANEL *panel3;
-PANEL *panel4;
+PANEL *panel5;
+PANEL *panel6;
 
 
 void smbadd();
@@ -39,8 +39,8 @@ void samba_menu()
 	post_menu(menu);
 	wrefresh(smb_win);
 	
-	panel3 = new_panel(smb_name);
-	panel4 = new_panel(smb_win);
+	panel5 = new_panel(smb_name);
+	panel6 = new_panel(smb_win);
 
 	int input;
 	
@@ -67,13 +67,13 @@ void samba_menu()
 
 			if(selected == items[0])
 			{
-				hidemenu(panel3);
-				hidemenu(panel4);
+				hidemenu(panel5);
+				hidemenu(panel6);
 
 				smbadd();
 
-				showmenu(panel3);
-				showmenu(panel4);
+				showmenu(panel5);
+				showmenu(panel6);
 
 				wrefresh(smb_win);
 
@@ -84,13 +84,13 @@ void samba_menu()
 			else if(selected == items[1])
 			{
 				
-				hidemenu(panel3);
-                                hidemenu(panel4);
+				hidemenu(panel5);
+                                hidemenu(panel6);
 
                                 smbedit();
 
-                                showmenu(panel3);
-                                showmenu(panel4);
+                                showmenu(panel5);
+                                showmenu(panel6);
 
                                 wrefresh(smb_win);
 
@@ -101,13 +101,13 @@ void samba_menu()
 			else if(selected == items[2])
                         {
 
-                                hidemenu(panel3);
-                                hidemenu(panel4);
+                                hidemenu(panel5);
+                                hidemenu(panel6);
 
                                 smbdel();
 
-                                showmenu(panel3);
-                                showmenu(panel4);
+                                showmenu(panel5);
+                                showmenu(panel6);
 
                                 wrefresh(smb_win);
 
@@ -118,13 +118,13 @@ void samba_menu()
 			else if(selected == items[3])
 			{
 
-				 hidemenu(panel3);
-                                hidemenu(panel4);
+				 hidemenu(panel5);
+                                hidemenu(panel6);
 
                                 user_menu();
 
-                                showmenu(panel3);
-                                showmenu(panel4);
+                                showmenu(panel5);
+                                showmenu(panel6);
 
                                 wrefresh(smb_win);
 
