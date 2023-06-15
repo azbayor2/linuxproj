@@ -458,10 +458,11 @@ void defaultnetwork()  //네트워크 리셋
 			clear();
 			refresh();
 			return;
+		}	
 		else if (key[0] == '^' && key[1] == 'E') {
           		endwin();
 			exit(0);
-		}	
+			
 		}
 		else if(input == KEY_F(7))
 		{

@@ -719,7 +719,7 @@ void smbdel() //삼바 삭제
 	fclose(file2);
 	
 	FILE *file3 = fopen("./NASA/SambaConf/slist2.tmp","r");   //설정 위치 가져오기
-	if (file2 == NULL)
+	if (file3 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
 		cbreak;
