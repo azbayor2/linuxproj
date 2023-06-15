@@ -122,9 +122,42 @@ void user_menu()
 
 
 void adduser() // 네트워크 설정
-{
+{	char user_name[100];
+	char user_psd[100];
+	
+	
+	printw("Please enter your Network User's name\n>>");
+	echo();
+	getstr(user_name);
+	refresh();
+	
+	clear();
+	printw("Please enter your Network user's password\n>>");
+	noecho();
+	getstr(user_psd);
+	refresh();
+	
+	clear();
+	refresh();
+	
+	cbreak();
+	noecho();
+	
+	char command[200];
+	
+	sprintf(command, "./NASA/UserConf/smb_useradd.sh \"%s\" \"%s\"",user_name,user_psd);
+	system(command);
+	
+	
+	printw("Done! Press any key to continue");
+	getch();
+	
+	clear();
+	
+	
 	
 	return;	
+	
 
 }
 
