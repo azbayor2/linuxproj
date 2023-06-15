@@ -10,6 +10,6 @@ delline=`expr $1 - 1` # 첫 줄
 endline=`expr $delline + 11` #마지막 줄
 
 
-sed -i "$delline,${endline}d" smb.conf  #지우기
+sed -i "$delline,${endline}d" ./NASA/SambaConf/smb.conf  #지우기
 
 
