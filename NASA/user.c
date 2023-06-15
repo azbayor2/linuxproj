@@ -128,6 +128,7 @@ void adduser() // 네트워크 설정
 	
 	printw("Please enter your Network User's name\n>>");
 	echo();
+	keypad(stdscr, FALSE);
 	getstr(user_name);
 	refresh();
 	
@@ -145,7 +146,7 @@ void adduser() // 네트워크 설정
 	
 	char command[200];
 	
-	sprintf(command, "./NASA/UserConf/smb_useradd.sh \"%s\" \"%s\"",user_name,user_psd);
+	sprintf(command, "./NASA/UserConf/smb_useradd.sh \"%s\" \"%s\"",user_name, user_psd);
 	system(command);
 	
 	
