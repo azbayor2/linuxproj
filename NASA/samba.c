@@ -756,7 +756,7 @@ void smbdel() //삼바 삭제
 	
 	if(config_num == 0)
 	{
-		printw("No drives found! Press any key to exit");
+		printw("No configs found! Press any key to exit");
 		cbreak;
 		noecho;
 		getch();
