@@ -516,7 +516,7 @@ void smbedit()  //삼바 수정
 	
 	}
 	
-	fclose(file2);
+	fclose(file3);
 	
 	
 	
@@ -583,7 +583,7 @@ void smbedit()  //삼바 수정
 		else if(input == 10||input == KEY_RIGHT) //엔터
 		{
 			int selected_loc = item_index(current_item(menu));
-			strcpy(sel_line_num, config_line[selected_loc]);
+			sel_line_num=config_line[selected_loc];
 			
 			
 			break;
@@ -598,7 +598,7 @@ void smbedit()  //삼바 수정
 		}
 	}
 	
-	printw("test : %d selected", sel_line_num);
+	
 
 	free_item(items[0]);
 	free_item(items[1]);
