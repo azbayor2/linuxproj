@@ -424,7 +424,7 @@ void smbedit()  //삼바 수정
 	
 	system("./NASA/SambaConf/searchlist.sh");
 	
-	FILE *file1 = fopen("./NASA/SambaConf/num_drive.txt", "r");    //드라이브 개수 가져오기
+	FILE *file1 = fopen("./NASA/SambaConf/config_num.tmp", "r");    //드라이브 개수 가져오기
 
 	if (file1 == NULL)
 	{
@@ -464,7 +464,7 @@ void smbedit()  //삼바 수정
 	
 	
 	
-	FILE *file2 = fopen("./NASA/SambaConf/temshow.tmp","r");   //설정 이름 가져오기
+	FILE *file2 = fopen("./NASA/SambaConf/tempshow.tmp","r");   //설정 이름 가져오기
 	if (file2 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -527,12 +527,12 @@ void smbedit()  //삼바 수정
 	MENU *menu;   //메뉴 생성
 
 
-	int main_choices_n = ARR_SIZE(config_num); 
+	int main_choices_n = ARR_SIZE(config_line); 
 	items = (ITEM**)calloc(main_choices_n + 1, sizeof(ITEM*));   //아이템 저장공간 동적할당
 
 	for(int i =0; i<main_choices_n; i++)  //미리 저장한 메뉴 옵션들을 아이템으로 옮김
 	{
-		items[i] = new_item(drive_name[i], NULL);
+		items[i] = new_item(config_name[i], NULL);
 	}
 
 	items[main_choices_n] = NULL;
@@ -562,6 +562,7 @@ void smbedit()  //삼바 수정
 
 	
 	int input;
+	int sel_line_num;
 	
 	
 
@@ -582,7 +583,7 @@ void smbedit()  //삼바 수정
 		else if(input == 10) //엔터
 		{
 			int selected_loc = item_index(current_item(menu));
-			strcpy(d_path, config_line[selected_loc]);
+			strcpy(sel_line_num, config_line[selected_loc]);
 			
 			
 			break;
@@ -596,6 +597,8 @@ void smbedit()  //삼바 수정
 			continue;
 		}
 	}
+	
+	printw("test : %d selected", sel_line_num);
 
 	free_item(items[0]);
 	free_item(items[1]);
@@ -603,7 +606,7 @@ void smbedit()  //삼바 수정
 	clear();
 	refresh();
 	
-	printw("test : %d selected", selected_loc);
+	
 	refresh();
 	getch();
 	clear();
