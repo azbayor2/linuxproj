@@ -16,6 +16,16 @@ numlines=`wc -l < ${path}slist2.tmp`
 rm ${path}tempshow.tmp > /dev/null 2>&1
 
 
+for ((i=1;i<=$numlines;i++));
+do
+	templine=`sed -n "${i}p" ${path}slist2.tmp`
+	templine=`expr $templine + 3`
+	#echo $templine
+	sed -n "$templine s/^.\{9\}\(.*\)/\1/p" ${path}smb.conf >> ${path}smb_drive_path.tmp
+	
+done
+
+
 #이름 추출하기
 
 echo $numlines > ${path}config_num.tmp

@@ -451,7 +451,7 @@ void smbedit()  //삼바 수정
 	
 	if(config_num == 0)
 	{
-		printw("No drives found! Press any key to exit");
+		printw("No config found! Press any key to exit");
 		cbreak;
 		noecho;
 		getch();
@@ -519,6 +519,35 @@ void smbedit()  //삼바 수정
 	fclose(file3);
 	
 	
+	FILE *file4 = fopen("./NASA/SambaConf/smb_drive_path.tmp","r");   //드라이브 경로 가져오기
+	if (file4 == NULL)
+	{
+		printw("An error has occured. Press any key to exit");
+		cbreak;
+		noecho;
+		getch();
+		clear();
+		refresh();
+		return;
+	}
+	
+	char *drive_path[config_num];
+	char temp2[100];
+	
+	for(int i = 0; i<config_num; i++)
+	{
+		fgets(temp2, sizeof(temp2), file4);
+		
+		if(strlen(temp2)>0 && temp2[strlen(temp2)-1] == '\n')
+			temp2[strlen(temp2)-1] = '\0';
+		drive_path[i] = (char*)malloc(strlen(temp2)*sizeof(char));
+		strcpy(drive_path[i], temp2);
+	
+	}
+	
+	fclose(file4);
+	
+	
 	
 	
 	
@@ -532,7 +561,7 @@ void smbedit()  //삼바 수정
 
 	for(int i =0; i<main_choices_n; i++)  //미리 저장한 메뉴 옵션들을 아이템으로 옮김
 	{
-		items[i] = new_item(config_name[i], NULL);
+		items[i] = new_item(config_name[i], drive_path[i]);
 	}
 
 	items[main_choices_n] = NULL;
@@ -563,7 +592,7 @@ void smbedit()  //삼바 수정
 	
 	int input;
 	int sel_line_num;
-	
+	char previous_drive_path[200];
 	
 
 	while(input = wgetch(menu_win))
@@ -584,6 +613,7 @@ void smbedit()  //삼바 수정
 		{
 			int selected_loc = item_index(current_item(menu));
 			sel_line_num=config_line[selected_loc];
+			strcpy(previous_drive_path, drive_path[selected_loc]);
 			
 			
 			break;
@@ -607,11 +637,86 @@ void smbedit()  //삼바 수정
 	refresh();
 	
 	
+	char command1[200];
+	
+	sprintf(command1, "./NASA/SambaConf/testshell.sh \"%d\"", sel_line_num);
+	system(command1);
+	
+	FILE *file5 = fopen("./NASA/SambaConf/needsedit.tmp","r");   //드라이브 경로 가져오기
+	if (file5 == NULL)
+	{
+		printw("An error has occured. Press any key to exit");
+		cbreak;
+		noecho;
+		getch();
+		clear();
+		refresh();
+		return;
+	}
+	
+	char *editing[2];
+	char temp3[100];
+	
+	for(int i = 0; i<2; i++)
+	{
+		fgets(temp3, sizeof(temp3), file5);
+		
+		if(strlen(temp3)>0 && temp3[strlen(temp3)-1] == '\n')
+			temp3[strlen(temp3)-1] = '\0';
+		editing[i] = (char*)malloc(strlen(temp3)*sizeof(char));
+		strcpy(editing[i], temp3);
+	
+	}
+	
+	fclose(file5);
+	
+	
+	
+	
+	
 	refresh();
-	getch();
 	clear();
 	
+	nocbreak();
+	echo();
 	
+	char new_name[200];
+	char new_comment[200];
+	
+	printw("Please enter the new name\n");    //이름 새로 받기
+	printw("Your previous name is: \n");
+	printw("%s\n>>", editing[0]);
+	refresh();
+	getstr(new_name);
+	
+	
+	clear();
+	printw("Please enter the new comment\n");  //설명 새로 받기
+	printw("Your previous comment is: \n");
+	printw("%s\n>>", editing[1]);
+	refresh();
+	getstr(new_comment);
+	
+	
+	char command2[200];
+	
+	sprintf(command2, "./NASA/SambaConf/smbdel.sh \"%d\"", sel_line_num);
+	system(command2);
+	
+	char command3[200];
+	
+	sprintf(command3, "./NASA/SambaConf/smbadd.sh \"%s\" \"%s\" \"%s\"", new_name, new_comment, previous_drive_path);
+	system(command3);
+	
+	system("rm ./NASA/SambaConf/*.tmp > /dev/null 2>1%");
+	clear();
+	
+	printw("Done! Press any key to continue");
+	getch();
+	
+	clear();
+	cbreak();
+	noecho();
 	
 	
 	return;
