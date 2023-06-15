@@ -199,7 +199,7 @@ void deluser()  //네트워크 리셋
 	
 	if(user_num == 0)
 	{
-		printw("No drives found! Press any key to exit");
+		printw("No user found! Press any key to exit");
 		cbreak;
 		noecho;
 		getch();
