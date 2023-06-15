@@ -2,11 +2,11 @@
 
 ./NASA/SambaConf/searchlist.sh
 
-filename="/NASA/SambaConf/slist2.tmp"
-declare -i check=$(wc -l < $"filename")
+filename="./NASA/SambaConf/slist2.tmp"
+declare -i check=$(wc -l < $filename)
 if [ $check -lt 1 ]; then
-	
-elif[ $check -eq 1 ]; then
+	echo
+elif [ $check == 1 ]; then
 	firstline=$(head -n 1 "$filename")
 	delline=`expr $firstline - 1`
 	endline=`expr $delline + 11`

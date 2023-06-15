@@ -46,11 +46,17 @@ void samba_menu()
 	
 	while(input = wgetch(smb_win))
 	{
+		char* key = keyname(input);
 		if(input == KEY_DOWN)
 		{	
 			menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(smb_win);
 		}
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+
 		
 		else if(input == KEY_UP)
 		{
@@ -60,7 +66,10 @@ void samba_menu()
 		
 		else if(input == KEY_F(5)||input == KEY_LEFT)
 			break;
-
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == 10||input == KEY_RIGHT)
 		{
 			ITEM * selected = current_item(menu);
@@ -338,9 +347,18 @@ void smbadd() // 삼바 추가
 
 	while(input = wgetch(menu_win))
 	{
+		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
-
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+	
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(menu_win);
@@ -596,10 +614,18 @@ void smbedit()  //삼바 수정
 	
 
 	while(input = wgetch(menu_win))
-	{
+	{	char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
 
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(menu_win);
@@ -798,7 +824,7 @@ void smbdel() //삼바 삭제
 	fclose(file2);
 	
 	FILE *file3 = fopen("./NASA/SambaConf/slist2.tmp","r");   //설정 위치 가져오기
-	if (file2 == NULL)
+	if (file3 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
 		cbreak;
@@ -864,10 +890,19 @@ void smbdel() //삼바 삭제
 	
 
 	while(input = wgetch(menu_win))
-	{
+	{	
+		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
-
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+	
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(menu_win);

@@ -45,12 +45,17 @@ void network_menu()
 	
 	while(input = wgetch(net_win))
 	{
+		char* key = keyname(input);
 		if(input == KEY_DOWN)
 		{	
 			menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(net_win);
 		}
-		
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+
 		else if(input == KEY_UP)
 		{
 			menu_driver(menu, REQ_UP_ITEM);
@@ -59,6 +64,10 @@ void network_menu()
 		
 		else if(input == KEY_F(5)||input == KEY_LEFT)
 			break;
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 
 		else if(input == 10||input == KEY_RIGHT)
 		{
@@ -238,9 +247,18 @@ void setnetwork() // 네트워크 설정
 
 	while(input = wgetch(menu_win))
 	{
+		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
 
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(menu_win);
@@ -434,12 +452,21 @@ void defaultnetwork()  //네트워크 리셋
 
 	while(input = wgetch(menu_win))
 	{
+		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 		{	
 			clear();
 			refresh();
 			return;
+		}	
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
 			
+		}
+		else if(input == KEY_F(7))
+		{
+			reset_all();
 		}
 
 		else if(input == KEY_DOWN)     //아랫방향
