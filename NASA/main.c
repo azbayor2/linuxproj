@@ -66,9 +66,10 @@ int main()     //메인 메뉴 출력 부분
 	panel2 = new_panel(main_name);
 	
 	int input;
-
+	
 	while(input = wgetch(main_menu_win))
 	{
+	char* key = keyname(input);
 		if(input == KEY_F(5))    //F5 누르면 나감
 			break;
 		else if(input == KEY_F(7))
@@ -76,6 +77,10 @@ int main()     //메인 메뉴 출력 부분
 			reset_all();
 		}
 		
+        	else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(main_menu, REQ_DOWN_ITEM);
 			wrefresh(main_menu_win);

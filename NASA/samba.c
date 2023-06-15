@@ -46,11 +46,17 @@ void samba_menu()
 	
 	while(input = wgetch(smb_win))
 	{
+		char* key = keyname(input);
 		if(input == KEY_DOWN)
 		{	
 			menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(smb_win);
 		}
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+
 		
 		else if(input == KEY_UP)
 		{
@@ -341,8 +347,14 @@ void smbadd() // 삼바 추가
 
 	while(input = wgetch(menu_win))
 	{
+		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+	
 		else if(input == KEY_F(7))
 		{
 			reset_all();
@@ -573,9 +585,14 @@ void smbedit()  //삼바 수정
 	
 
 	while(input = wgetch(menu_win))
-	{
+	{	char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+
 		else if(input == KEY_F(7))
 		{
 			reset_all();
@@ -768,9 +785,15 @@ void smbdel() //삼바 삭제
 	
 
 	while(input = wgetch(menu_win))
-	{
+	{	
+		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
+		else if (key[0] == '^' && key[1] == 'E') {
+          		endwin();
+			exit(0);
+		}
+	
 		else if(input == KEY_F(7))
 		{
 			reset_all();
