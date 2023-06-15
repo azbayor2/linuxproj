@@ -58,10 +58,10 @@ void samba_menu()
 			wrefresh(smb_win);
 		}
 		
-		else if(input == KEY_F(5))
+		else if(input == KEY_F(5)||input == KEY_LEFT)
 			break;
 
-		else if(input == 10)
+		else if(input == 10||input == KEY_RIGHT)
 		{
 			ITEM * selected = current_item(menu);
 
@@ -338,7 +338,7 @@ void smbadd() // 삼바 추가
 
 	while(input = wgetch(menu_win))
 	{
-		if(input == KEY_F(5))    //F5 누르면 나감
+		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
 
 		else if(input == KEY_DOWN)     //아랫방향
@@ -350,7 +350,7 @@ void smbadd() // 삼바 추가
 			wrefresh(menu_win);
 		}
 
-		else if(input == 10) //엔터
+		else if(input == 10||input == KEY_RIGHT) //엔터
 		{
 			int selected_loc = item_index(current_item(menu));
 			strcpy(d_path, drive_loc[selected_loc]);

@@ -81,7 +81,7 @@ int main()     //메인 메뉴 출력 부분
 			wrefresh(main_menu_win);
 		}
 
-		else if(input == 10) //엔터
+		else if(input == 10||input == KEY_RIGHT) //엔터
 		{
 			ITEM * selected = current_item(main_menu);
 		        

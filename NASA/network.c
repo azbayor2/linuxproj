@@ -57,10 +57,10 @@ void network_menu()
 			wrefresh(net_win);
 		}
 		
-		else if(input == KEY_F(5))
+		else if(input == KEY_F(5)||input == KEY_LEFT)
 			break;
 
-		else if(input == 10)
+		else if(input == 10||input == KEY_RIGHT)
 		{
 			ITEM * selected = current_item(menu);
 
@@ -238,7 +238,7 @@ void setnetwork() // 네트워크 설정
 
 	while(input = wgetch(menu_win))
 	{
-		if(input == KEY_F(5))    //F5 누르면 나감
+		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
 
 		else if(input == KEY_DOWN)     //아랫방향
@@ -250,7 +250,7 @@ void setnetwork() // 네트워크 설정
 			wrefresh(menu_win);
 		}
 
-		else if(input == 10) //엔터
+		else if(input == 10||input == KEY_RIGHT) //엔터
 		{
 			ITEM * selected = current_item(menu);
 			strncpy(int_name, item_name(selected), 100);
@@ -434,7 +434,7 @@ void defaultnetwork()  //네트워크 리셋
 
 	while(input = wgetch(menu_win))
 	{
-		if(input == KEY_F(5))    //F5 누르면 나감
+		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 		{	
 			clear();
 			refresh();
@@ -451,7 +451,7 @@ void defaultnetwork()  //네트워크 리셋
 			wrefresh(menu_win);
 		}
 
-		else if(input == 10) //엔터
+		else if(input == 10||input == KEY_RIGHT) //엔터
 		{
 			ITEM * selected = current_item(menu);
 			strncpy(int_name, item_name(selected), 100);

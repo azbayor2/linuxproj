@@ -57,10 +57,10 @@ void user_menu()
 			wrefresh(user_win);
 		}
 		
-		else if(input == KEY_F(5))
+		else if(input == KEY_F(5)||input == KEY_LEFT)
 			break;
 
-		else if(input == 10)
+		else if(input == 10||input == KEY_RIGHT)
 		{
 			ITEM * selected = current_item(menu);
 

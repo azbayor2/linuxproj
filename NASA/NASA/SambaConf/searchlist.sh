@@ -12,6 +12,7 @@ cut -d ':' -f 1 slist.tmp > slist2.tmp
 #줄 개수 저장하기
 numlines=`wc -l < slist2.tmp`
 
+rm tempshow.tmp > /dev/null 2>&1
 
 #이름 추출하기
 for ((i=1 ; i < $numlines+1 ; i++));
