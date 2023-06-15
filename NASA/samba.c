@@ -568,7 +568,7 @@ void smbedit()  //삼바 수정
 
 	while(input = wgetch(menu_win))
 	{
-		if(input == KEY_F(5))    //F5 누르면 나감
+		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
 
 		else if(input == KEY_DOWN)     //아랫방향
@@ -580,7 +580,7 @@ void smbedit()  //삼바 수정
 			wrefresh(menu_win);
 		}
 
-		else if(input == 10) //엔터
+		else if(input == 10||input == KEY_RIGHT) //엔터
 		{
 			int selected_loc = item_index(current_item(menu));
 			strcpy(sel_line_num, config_line[selected_loc]);
@@ -760,7 +760,7 @@ void smbdel() //삼바 삭제
 
 	while(input = wgetch(menu_win))
 	{
-		if(input == KEY_F(5))    //F5 누르면 나감
+		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
 
 		else if(input == KEY_DOWN)     //아랫방향
@@ -772,7 +772,7 @@ void smbdel() //삼바 삭제
 			wrefresh(menu_win);
 		}
 
-		else if(input == 10) //엔터
+		else if(input == 10||input == KEY_RIGHT) //엔터
 		{
 			int selected_loc = item_index(current_item(menu));
 			sel_line_num=config_line[selected_loc];
@@ -801,6 +801,26 @@ void smbdel() //삼바 삭제
 	
 	sprintf(command, "./NASA/SambaConf/smbdel.sh \"%d\"",sel_line_num);
 	system(command);
+	
+	
+	free_item(items[0]);
+	free_item(items[1]);
+	free_menu(menu);
+	clear();
+	refresh();
+        
+	cbreak();
+	noecho();
+	
+	printw("Done! Press any key to continue");
+	getch();
+	
+	
+	
+	
+	
+	clear();
+	
 
 	return;
 }
