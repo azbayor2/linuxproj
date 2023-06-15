@@ -59,6 +59,10 @@ void user_menu()
 		
 		else if(input == KEY_F(5)||input == KEY_LEFT)
 			break;
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 
 		else if(input == 10||input == KEY_RIGHT)
 		{

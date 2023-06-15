@@ -71,10 +71,11 @@ int main()     //메인 메뉴 출력 부분
 	{
 		if(input == KEY_F(5))    //F5 누르면 나감
 			break;
-		else if(input == KEY_F(7))//모든 삼바 삭제
-		{	system("./NASA/SambaConf/smbdelall.sh");
+		else if(input == KEY_F(7))
+		{
+			reset_all();
 		}
-
+		
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(main_menu, REQ_DOWN_ITEM);
 			wrefresh(main_menu_win);

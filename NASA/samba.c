@@ -60,7 +60,10 @@ void samba_menu()
 		
 		else if(input == KEY_F(5)||input == KEY_LEFT)
 			break;
-
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == 10||input == KEY_RIGHT)
 		{
 			ITEM * selected = current_item(menu);
@@ -340,7 +343,10 @@ void smbadd() // 삼바 추가
 	{
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
-
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(menu_win);
@@ -570,7 +576,10 @@ void smbedit()  //삼바 수정
 	{
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
-
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(menu_win);
@@ -762,7 +771,10 @@ void smbdel() //삼바 삭제
 	{
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
 			return;
-
+		else if(input == KEY_F(7))
+		{
+			reset_all();
+		}
 		else if(input == KEY_DOWN)     //아랫방향
 		{	menu_driver(menu, REQ_DOWN_ITEM);
 			wrefresh(menu_win);

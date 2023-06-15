@@ -1,4 +1,4 @@
-objfiles = main.o panel.o samba.o network.o user.o
+objfiles = main.o panel.o samba.o network.o user.o reset.o
 curses = -lncurses -lpanel -lmenu
 
 
@@ -25,6 +25,8 @@ panel.o : panel.c
 user.o : user.c
 	gcc -c -g $^ $(curses)
 
+reset.o : reset.c
+	gcc -c -g $^ $(curses)
 
 clean:
 	rm *.o *.gch
