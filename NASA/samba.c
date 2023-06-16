@@ -735,7 +735,7 @@ void smbedit()  //삼바 수정
 	sprintf(command3, "./NASA/SambaConf/smbadd.sh \"%s\" \"%s\" \"%s\"", new_name, new_comment, previous_drive_path);
 	system(command3);
 	
-	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>1%");
+	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>&1");
 	clear();
 	
 	printw("Done! Press any key to continue");
@@ -954,7 +954,7 @@ void smbdel() //삼바 삭제
 	noecho();
 	
 	printw("Done! Press any key to continue");
-	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>1%");
+	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>&1");
 	getch();
 	
 	

@@ -15,6 +15,18 @@ int main()     //메인 메뉴 출력 부분
 	
 	initscr();
 	printw("NASA\n");
+	
+	if(geteuid()!=0)
+	{
+		printw("\nThis Program requires Root Priviledge!\n");
+		printw("Please run as ROOT!");
+		getch();
+		
+		
+		endwin();
+		
+		return 0;
+	}
 	printw("Press any key to enter");
 	refresh();
 
