@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 #인자로 네트워크 인터페이스 받기
 network_int=$1
