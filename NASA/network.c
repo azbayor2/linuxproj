@@ -514,7 +514,7 @@ void defaultnetwork()  //네트워크 리셋
 	
 	char command[200];
 	
-	sprintf(command, "./NASA/NetworkConf/static.sh %s",int_name);
+	sprintf(command, "./NASA/NetworkConf/reset.sh %s",int_name);
 	system(command);
 	
 	printw("Done! Press any key to continue");
