@@ -155,6 +155,7 @@ void adduser() // 네트워크 설정
 	
 	
 	printw("Done! Press any key to continue");
+	system("./NASA/UserConf/cleartmp.sh > /dev/null 2>&1");
 	getch();
 	
 	clear();
@@ -348,6 +349,7 @@ void deluser()  //네트워크 리셋
 	noecho();
 	
 	printw("Done! Press any key to continue");
+	system("./NASA/UserConf/cleartmp.sh > /dev/null 2>&1");
 	getch();
 	
 	

@@ -13,7 +13,6 @@ cut -d ':' -f 1 ${path}slist.tmp > ${path}slist2.tmp
 numlines=`wc -l < ${path}slist2.tmp`
 
 
-rm ${path}tempshow.tmp > /dev/null 2>&1
 
 
 for ((i=1;i<=$numlines;i++));

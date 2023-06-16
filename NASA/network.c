@@ -142,7 +142,7 @@ void setnetwork() // 네트워크 설정
 	
 	system("./NASA/NetworkConf/new_interface.sh");
 	
-	FILE *file1 = fopen("./NASA/NetworkConf/temp1_num.txt", "r");
+	FILE *file1 = fopen("./NASA/NetworkConf/temp1_num.tmp", "r");
 	if (file1 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -173,7 +173,7 @@ void setnetwork() // 네트워크 설정
 	
 	fclose(file1);
 	
-	FILE *file2 = fopen("./NASA/NetworkConf/temp1.txt","r");
+	FILE *file2 = fopen("./NASA/NetworkConf/temp1.tmp","r");
 	if (file2 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -322,6 +322,7 @@ void setnetwork() // 네트워크 설정
 	system(command);
 	
 	printw("Done! Press any key to continue");
+	system("./NASA/NetworkConf/cleartmp.sh > /dev/null 2>&1");
 	getch();
 	
 	
@@ -347,7 +348,7 @@ void defaultnetwork()  //네트워크 리셋
 	
 	system("./NASA/NetworkConf/new_interface.sh");
 	
-	FILE *file1 = fopen("./NASA/NetworkConf/temp1_num.txt", "r");
+	FILE *file1 = fopen("./NASA/NetworkConf/temp1_num.tmp", "r");
 	if (file1 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -378,7 +379,7 @@ void defaultnetwork()  //네트워크 리셋
 	
 	fclose(file1);
 	
-	FILE *file2 = fopen("./NASA/NetworkConf/temp1.txt","r");
+	FILE *file2 = fopen("./NASA/NetworkConf/temp1.tmp","r");
 	if (file2 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -517,6 +518,7 @@ void defaultnetwork()  //네트워크 리셋
 	system(command);
 	
 	printw("Done! Press any key to continue");
+	system("./NASA/NetworkConf/cleartmp.sh > /dev/null 2>&1");
 	refresh();
 	getch();
 	

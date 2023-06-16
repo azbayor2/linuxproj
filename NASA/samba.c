@@ -176,7 +176,7 @@ void smbadd() // 삼바 추가
 	
 	system("./NASA/SambaConf/listdrive.sh");
 	
-	FILE *file1 = fopen("./NASA/SambaConf/num_drive.txt", "r");    //드라이브 개수 가져오기
+	FILE *file1 = fopen("./NASA/SambaConf/num_drive.tmp", "r");    //드라이브 개수 가져오기
 
 	if (file1 == NULL)
 	{
@@ -215,7 +215,7 @@ void smbadd() // 삼바 추가
 	fclose(file1);
 	
 	
-	FILE *file2 = fopen("./NASA/SambaConf/drive_name.txt","r");   //드라이브 이름 가져오기
+	FILE *file2 = fopen("./NASA/SambaConf/drive_name.tmp","r");   //드라이브 이름 가져오기
 	if (file2 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -244,7 +244,7 @@ void smbadd() // 삼바 추가
 	fclose(file2);
 	
 	
-	FILE *file3 = fopen("./NASA/SambaConf/drive_cap.txt","r");    //드라이브 용량 가져오기
+	FILE *file3 = fopen("./NASA/SambaConf/drive_cap.tmp","r");    //드라이브 용량 가져오기
 	if (file3 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -272,7 +272,7 @@ void smbadd() // 삼바 추가
 	fclose(file3);
 	
 	
-	FILE *file4 = fopen("./NASA/SambaConf/mntpoint.txt","r");    //드라이브 위치 가져오기
+	FILE *file4 = fopen("./NASA/SambaConf/mntpoint.tmp","r");    //드라이브 위치 가져오기
 	if (file4 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -427,6 +427,7 @@ void smbadd() // 삼바 추가
 	
 	
 	clear();
+	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>&1");
 	
 	
 	
@@ -665,7 +666,7 @@ void smbedit()  //삼바 수정
 	
 	char command1[200];
 	
-	sprintf(command1, "./NASA/SambaConf/testshell.sh \"%d\"", sel_line_num);
+	sprintf(command1, "./NASA/SambaConf/getedit.sh \"%d\"", sel_line_num);
 	system(command1);
 	
 	FILE *file5 = fopen("./NASA/SambaConf/needsedit.tmp","r");   //드라이브 경로 가져오기
@@ -734,7 +735,7 @@ void smbedit()  //삼바 수정
 	sprintf(command3, "./NASA/SambaConf/smbadd.sh \"%s\" \"%s\" \"%s\"", new_name, new_comment, previous_drive_path);
 	system(command3);
 	
-	system("rm ./NASA/SambaConf/*.tmp > /dev/null 2>1%");
+	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>1%");
 	clear();
 	
 	printw("Done! Press any key to continue");
@@ -953,6 +954,7 @@ void smbdel() //삼바 삭제
 	noecho();
 	
 	printw("Done! Press any key to continue");
+	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>1%");
 	getch();
 	
 	
