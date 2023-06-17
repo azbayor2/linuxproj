@@ -406,8 +406,191 @@ void smbadd() // 삼바 추가
 	
 	
 	
-	nocbreak();
-	echo();
+	cbreak();
+	noecho();
+	
+	///////////////////////////////////////////////////////////////////
+	
+	FIELD *test[2];
+	FORM *form;
+
+	test[0] = new_field(1,38,0,0,0,0);
+	test[1] = NULL;
+
+	//set_field_buffer(test[0], 0, editing[0]);
+	//field_opts_on(test[0], O_EDIT);
+	//field_opts_on(test[0], O_VISIBLE);
+	field_opts_off(test[0], O_STATIC);
+	set_field_just(test[0], JUSTIFY_LEFT);
+
+	form = new_form(test);
+
+	WINDOW *win = newwin(5,40,4,0);
+	WINDOW *win_name = newwin(2,40,0,1);
+	wprintw(win_name, "Please enter your Network Drive's name");
+	wrefresh(win_name);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+
+	post_form(form);
+
+	wrefresh(win);
+
+	form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	int ch;
+
+	while((ch=wgetch(win)) != '\n')
+	{
+
+		char* key = keyname(ch);
+		
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
+		{
+          		endwin();
+			exit(0);
+		}
+		
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else
+			form_driver(form, ch);
+			
+	
+
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+	
+	strcpy(config_name, field_buffer(test[0],0));
+
+	int config_name_ind = strlen(config_name) -1;
+	
+	while(config_name_ind>= 0 && isspace(config_name[config_name_ind]))
+	{
+		config_name[config_name_ind] = '\0';
+		config_name_ind--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+	delwin(win);
+	
+	
+
+	clear();	/////////////////////////
+	
+	
+	test[0] = new_field(1, 38, 0,0,0,0);
+	//set_field_buffer(test[0], 0, editing[1]);
+	form = new_form(test);
+	wclear(win_name);
+	
+	
+	
+	wprintw(win_name, "Please enter your Network Drive's description");
+	wrefresh(win_name);
+	
+	win = newwin(5,40,4,0);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+	
+	post_form(form);
+
+	wrefresh(win);
+
+	form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	
+
+	while((ch=wgetch(win)) != '\n')
+	{
+
+		char* key = keyname(ch);
+		
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
+		{
+          		endwin();
+			exit(0);
+		}
+		
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else
+			form_driver(form, ch);
+			
+	
+
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+	
+	strcpy(config_desc, field_buffer(test[0],0));
+	
+	int config_desc_ind = strlen(config_desc) -1;
+	
+	while(config_desc_ind>= 0 && isspace(config_desc[config_desc_ind]))
+	{
+		config_desc[config_desc_ind] = '\0';
+		config_desc_ind--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+	delwin(win);
+	delwin(win_name);
+	
+	
+	
+	
+	clear();
+	refresh();
+	
+	/*
 	
 	printw("Please enter your Network Drive's name\n>>");
 	getstr(config_name);
@@ -423,6 +606,9 @@ void smbadd() // 삼바 추가
 	
 	cbreak();
 	noecho();
+	
+	
+	*/
 	
 	char command[200];
 	
@@ -548,7 +734,7 @@ void smbedit()  //삼바 수정
 	fclose(file3);
 	
 	
-	FILE *file4 = fopen("./NASA/SambaConf/smb_drive_path.tmp",'r');   //드라이브 경로 가져오기
+	FILE *file4 = fopen("./NASA/SambaConf/smb_drive_path.tmp","r");   //드라이브 경로 가져오기
 	if (file4 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
