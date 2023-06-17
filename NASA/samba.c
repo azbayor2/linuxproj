@@ -548,7 +548,7 @@ void smbedit()  //삼바 수정
 	fclose(file3);
 	
 	
-	FILE *file4 = fopen("./NASA/SambaConf/smb_drive_path.tmp",'r');   //드라이브 경로 가져오기
+	FILE *file4 = fopen("./NASA/SambaConf/smb_drive_path.tmp","r");   //드라이브 경로 가져오기
 	if (file4 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");

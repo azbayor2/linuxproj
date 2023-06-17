@@ -131,7 +131,10 @@ void user_menu()
 
 
 void adduser() // 네트워크 설정
-{	char user_name[100];
+{	
+
+	clear();
+	char user_name[100];
 	char user_psd[100];
 	
 	
@@ -158,6 +161,22 @@ void adduser() // 네트워크 설정
 	sprintf(command, "./NASA/UserConf/smb_useradd.sh \"%s\" \"%s\"",user_name, user_psd);
 	system(command);
 	
+	FILE *Usererr = fopen("./NASA/UserConf/error.tmp","r");
+	if(Usererr != NULL){
+	fseek(Usererr,0,SEEK_END);
+	
+	int size = ftell(Usererr);
+	if(size>0){
+			printw("Error,unable to add user.\n");
+        		printw("Make sure you entered correctly!\n\n");
+        		printw("Press any key to continue");
+        		getch();
+        		clear();
+        		return;
+        	}
+	}
+	fclose(Usererr);
+	
 	
 	printw("Done! Press any key to continue");
 	system("./NASA/UserConf/cleartmp.sh > /dev/null 2>&1");
@@ -174,7 +193,11 @@ void adduser() // 네트워크 설정
 
 
 void deluser()  //네트워크 리셋
-{	int user_num = 0;
+{	
+
+	clear();
+
+	int user_num = 0;
 	
 	system("./NASA/UserConf/smb_userlist.sh");
 	
