@@ -135,9 +135,13 @@ void adduser() // 네트워크 설정
 
 
 
+
 	cbreak();
 	noecho();
 
+
+
+	clear();
 
 	char user_name[100];
 	char user_psd[100];
@@ -375,7 +379,11 @@ void adduser() // 네트워크 설정
 
 
 void deluser()  //네트워크 리셋
-{	int user_num = 0;
+{	
+
+	clear();
+
+	int user_num = 0;
 	
 	system("./NASA/UserConf/smb_userlist.sh");
 	
