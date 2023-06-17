@@ -29,4 +29,4 @@ mkdir /etc/netplan/pro_backup/ > /dev/null 2>&1
 mv /etc/netplan/*.yaml /etc/netplan/pro_backup/* > /dev/null 2>&1 #backup
 mv ./NASA/NetworkConf/01-network.tmp /etc/netplan/01-network.yaml > /dev/null 2>&1 #substitute
 
-sudo netplan apply > /dev/null 2>&1 > ./NASA/NetworkConf/error.tmp
+sudo netplan apply > /dev/null 2&> ./NASA/NetworkConf/error.tmp

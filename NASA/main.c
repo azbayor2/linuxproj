@@ -18,8 +18,9 @@ int main()     //메인 메뉴 출력 부분
 	
 	if(geteuid()!=0)
 	{
-		printw("\nThis Program requires Root Priviledge!\n");
-		printw("Please run as ROOT!");
+		printw("\n\nThis Program requires Root Priviledge!\n\n");
+		printw("Please run as ROOT!\n\n\n\n");
+		printw("Press any key to Exit");
 		getch();
 		
 		
@@ -108,6 +109,7 @@ int main()     //메인 메뉴 출력 부분
 		        
 			if(selected == main_items[0])  //네트워크 드라이브 메뉴 호출
 			{
+				
 				hidemenu(panel1);
 				hidemenu(panel2);
 				

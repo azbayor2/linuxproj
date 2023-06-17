@@ -45,6 +45,7 @@ void network_menu()
 	
 	while(input = wgetch(net_win))
 	{
+		system("./NASA/NetworkConf/cleartmp.sh > /dev/null 2>&1");
 		char* key = keyname(input);
 		if(input == KEY_DOWN)
 		{	
@@ -63,7 +64,11 @@ void network_menu()
 		}
 		
 		else if(input == KEY_F(5)||input == KEY_LEFT)
+		{
+			clear();
+			refresh();
 			break;
+		}
 		else if(input == KEY_F(7))
 		{
 			reset_all();
@@ -249,7 +254,12 @@ void setnetwork() // 네트워크 설정
 	{
 		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
+		{
+			clear();
+			refresh();
 			return;
+		
+		}
 		else if (key[0] == '^' && key[1] == 'E') {
           		endwin();
 			exit(0);
@@ -296,13 +306,236 @@ void setnetwork() // 네트워크 설정
 	
 	
 	
-	nocbreak();
-	echo();
+	cbreak();
+	noecho();
+	///////////////////////////
+	FIELD *test[2];
+	FORM *form;
+
+	test[0] = new_field(1,38,0,0,0,0);
+	test[1] = NULL;
+
 	
-	printw("Please enter your ipaddress/length\n>>");
-	getstr(ipaddress);
-	refresh();
+	//field_opts_on(test[0], O_EDIT);
+	//field_opts_on(test[0], O_VISIBLE);
+	//field_opts_off(test[0], O_STATIC);
+	set_field_just(test[0], JUSTIFY_LEFT);
+
+	form = new_form(test);
+
+	WINDOW *win = newwin(5,40,4,0);
+	WINDOW *win_name = newwin(2,40,0,1);
+	wprintw(win_name, "Please enter the IP address");
+	wrefresh(win_name);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+
+	post_form(form);
+
+	wrefresh(win);
+
+	//form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	int ch;
+
+	while((ch=wgetch(win)) != '\n')
+	{
+
+		
+		
+		
+		switch(ch)
+		{
+			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
+			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
+			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+		
+			default: if(isdigit(ch) || ch=='.' || ch=='/') form_driver(form,ch); break;
+		}	
+
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+
+
+
+	strcpy(ipaddress, field_buffer(test[0],0));
 	
+	int ipaddress_length = strlen(ipaddress)-1;
+	
+	while(ipaddress_length>= 0 && isspace(ipaddress[ipaddress_length]))
+	{
+		ipaddress[ipaddress_length] = '\0';
+		ipaddress_length--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+
+	clear();
+
+	
+	
+	///////////////////////////////////
+	
+	
+	test[0] = new_field(1,38,0,0,0,0);
+	test[1] = NULL;
+
+	
+	//field_opts_on(test[0], O_EDIT);
+	//field_opts_on(test[0], O_VISIBLE);
+	//field_opts_off(test[0], O_STATIC);
+	set_field_just(test[0], JUSTIFY_LEFT);
+
+	form = new_form(test);
+
+	win = newwin(5,40,4,0);
+	wclear(win_name);
+	wprintw(win_name, "Please enter the Primary DNS");
+	
+	wrefresh(win_name);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+
+	post_form(form);
+
+	wrefresh(win);
+
+	//form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+
+
+	while((ch=wgetch(win)) != '\n')
+	{
+
+		
+		
+		
+		switch(ch)
+		{
+			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
+			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
+			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+		
+			default: if(isdigit(ch) || ch=='.') form_driver(form,ch); break;
+		}	
+
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+
+
+
+	strcpy(DNS1, field_buffer(test[0],0));
+	
+	int DNS1_length = strlen(DNS1)-1;
+	
+	while(DNS1_length>= 0 && isspace(DNS1[DNS1_length]))
+	{
+		DNS1[DNS1_length] = '\0';
+		DNS1_length--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+
+	clear();
+
+	
+
+	
+	/////////////////////////////
+	
+	test[0] = new_field(1,38,0,0,0,0);
+	test[1] = NULL;
+
+	
+	//field_opts_on(test[0], O_EDIT);
+	//field_opts_on(test[0], O_VISIBLE);
+	//field_opts_off(test[0], O_STATIC);
+	set_field_just(test[0], JUSTIFY_LEFT);
+
+	form = new_form(test);
+
+	win = newwin(5,40,4,0);
+	wclear(win_name);
+	wprintw(win_name, "Please enter the Secondary DNS");
+	
+	wrefresh(win_name);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+
+	post_form(form);
+
+	wrefresh(win);
+
+	//form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	
+
+	while((ch=wgetch(win)) != '\n')
+	{
+
+		
+		
+		
+		switch(ch)
+		{
+			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
+			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
+			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+		
+			default: if(isdigit(ch) || ch=='.') form_driver(form,ch); break;
+		}	
+
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+
+
+
+	strcpy(DNS2, field_buffer(test[0],0));
+	
+	int DNS2_length = strlen(DNS2)-1;
+	
+	while(DNS2_length>= 0 && isspace(DNS2[DNS2_length]))
+	{
+		DNS2[DNS2_length] = '\0';
+		DNS2_length--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+
+	clear();
+	
+	///////////////////////
+	/*
 	clear();
 	printw("Please enter your primary DNS\n>>");
 	getstr(DNS1);
@@ -315,23 +548,41 @@ void setnetwork() // 네트워크 설정
 	
 	cbreak();
 	noecho();
+	*/
 	
 	char command[200];
 	
 	sprintf(command, "./NASA/NetworkConf/static.sh %s %s %s %s",int_name, ipaddress, DNS1, DNS2);
 	system(command);
 	
+	FILE *neterr = fopen("./NASA/NetworkConf/error.tmp", "r");
+	
+	if (neterr != NULL) {
+        	fseek(neterr, 0, SEEK_END); 
+        	
+        	int size = ftell(neterr);
+        	if(size >0){
+        		printw("Error, Netplan was unable to apply setting.\n");
+        		printw("Make sure you entered correctly!\n\n");
+        		printw("Press any key to continue");
+        		getch();
+        		clear();
+        		return;
+        	}
+        }
+        		
+       fclose(neterr);
+        
+	
 	printw("Done! Press any key to continue");
-	system("./NASA/NetworkConf/cleartmp.sh > /dev/null 2>&1");
+	system("./NASA/NetworkConf/cleartmp.sh");
+	
+	
+	
 	getch();
 	
 	
-	
-	
-	
 	clear();
-	
-	
 	
 	
 	return;	

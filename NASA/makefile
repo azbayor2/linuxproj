@@ -1,5 +1,5 @@
 objfiles = main.o panel.o samba.o network.o user.o reset.o
-curses = -lncurses -lpanel -lmenu
+curses = -lncurses -lpanel -lmenu -lform
 
 
 main.out : $(objfiles)

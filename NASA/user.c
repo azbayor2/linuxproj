@@ -45,6 +45,7 @@ void user_menu()
 	
 	while(input = wgetch(user_win))
 	{
+		system("./NASA/UserConf/cleartmp.sh > /dev/null 2>&1");
 		if(input == KEY_DOWN)
 		{	
 			menu_driver(menu, REQ_DOWN_ITEM);
@@ -58,7 +59,11 @@ void user_menu()
 		}
 		
 		else if(input == KEY_F(5)||input == KEY_LEFT)
+		{
+			clear();
+			refresh();
 			break;
+		}
 		else if(input == KEY_F(7))
 		{
 			reset_all();
@@ -288,7 +293,11 @@ void deluser()  //네트워크 리셋
 	{	
 		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
+		{
+			clear();
+			refresh();
 			return;
+		}
 		else if (key[0] == '^' && key[1] == 'E') {
           		endwin();
 			exit(0);

@@ -3,6 +3,8 @@
 #include <menu.h>
 #include <panel.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <form.h>
 #define ARR_SIZE(arr) sizeof(arr)/sizeof(arr[0])
 
 void network_menu();  //network.c

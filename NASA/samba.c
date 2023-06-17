@@ -12,7 +12,7 @@ void smbdel();
 
 void samba_menu()
 {
-
+	clear();
 	ITEM **items;
 	MENU *menu;
 	
@@ -46,6 +46,7 @@ void samba_menu()
 	
 	while(input = wgetch(smb_win))
 	{
+		system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>&1");
 		char* key = keyname(input);
 		if(input == KEY_DOWN)
 		{	
@@ -65,7 +66,11 @@ void samba_menu()
 		}
 		
 		else if(input == KEY_F(5)||input == KEY_LEFT)
+		{
+			clear();
+			refresh();
 			break;
+		}
 		else if(input == KEY_F(7))
 		{
 			reset_all();
@@ -168,6 +173,7 @@ void samba_menu()
 void smbadd() // 삼바 추가
 {
 	
+	clear();
 	char config_name[100];
 	char config_desc[100];
 	char d_path[100];
@@ -349,7 +355,11 @@ void smbadd() // 삼바 추가
 	{
 		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
+		{
+			clear();
+			refresh();
 			return;
+		}
 		else if (key[0] == '^' && key[1] == 'E') {
           		endwin();
 			exit(0);
@@ -438,7 +448,7 @@ void smbadd() // 삼바 추가
 
 void smbedit()  //삼바 수정
 {
-	
+	clear();
 	int config_num = 0;
 	
 	system("./NASA/SambaConf/searchlist.sh");
@@ -538,7 +548,7 @@ void smbedit()  //삼바 수정
 	fclose(file3);
 	
 	
-	FILE *file4 = fopen("./NASA/SambaConf/smb_drive_path.tmp","r");   //드라이브 경로 가져오기
+	FILE *file4 = fopen("./NASA/SambaConf/smb_drive_path.tmp",'r');   //드라이브 경로 가져오기
 	if (file4 == NULL)
 	{
 		printw("An error has occured. Press any key to exit");
@@ -587,17 +597,17 @@ void smbedit()  //삼바 수정
 	
 	menu = new_menu((ITEM**)items);  //메뉴에 아이템 연동
 	
-	WINDOW *menu_win = newwin(10,30,4,0);   //메뉴가 들어갈 하위 윈도우(박스) 만들기
+	WINDOW *menu_win = newwin(10,40,4,0);   //메뉴가 들어갈 하위 윈도우(박스) 만들기
 
 
-	WINDOW *main_name = newwin(3,30,0,1);  //메뉴의 이름이 들어갈 박스 만들기
+	WINDOW *main_name = newwin(3,40,0,1);  //메뉴의 이름이 들어갈 박스 만들기
 	wprintw(main_name, "Please Select the config name to edit\n");
 	wprintw(main_name, "Press F5 to exit");
 	wrefresh(main_name);
 	
 	keypad(menu_win, true);
 	set_menu_win(menu, menu_win);
-	set_menu_sub(menu, derwin(menu_win, 6, 28, 2,1));  //메뉴 설정(윗줄이 왜 필요한지 모르겠음)
+	set_menu_sub(menu, derwin(menu_win, 6, 38, 2,1));  //메뉴 설정(윗줄이 왜 필요한지 모르겠음)
 	box(menu_win, 0,0);
 	
 	noecho();
@@ -617,7 +627,12 @@ void smbedit()  //삼바 수정
 	while(input = wgetch(menu_win))
 	{	char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
+		{
+			clear();
+			refresh();
 			return;
+		}
+		
 		else if (key[0] == '^' && key[1] == 'E') {
           		endwin();
 			exit(0);
@@ -697,32 +712,159 @@ void smbedit()  //삼바 수정
 	
 	fclose(file5);
 	
-	
+	/////////////////////////////////////////
 	
 	
 	
 	refresh();
 	clear();
 	
-	nocbreak();
-	echo();
+	cbreak();
+	noecho();
 	
 	char new_name[200];
 	char new_comment[200];
 	
-	printw("Please enter the new name\n");    //이름 새로 받기
-	printw("Your previous name is: \n");
-	printw("%s\n>>", editing[0]);
-	refresh();
-	getstr(new_name);
+	
+	
+	FIELD *test[2];
+	FORM *form;
+
+	test[0] = new_field(1,38,0,0,0,0);
+	test[1] = NULL;
+
+	set_field_buffer(test[0], 0, editing[0]);
+	//field_opts_on(test[0], O_EDIT);
+	//field_opts_on(test[0], O_VISIBLE);
+	field_opts_off(test[0], O_STATIC);
+	set_field_just(test[0], JUSTIFY_LEFT);
+
+	form = new_form(test);
+
+	WINDOW *win = newwin(5,40,4,0);
+	WINDOW *win_name = newwin(2,40,0,1);
+	wprintw(win_name, "Please enter the new name");
+	wrefresh(win_name);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+
+	post_form(form);
+
+	wrefresh(win);
+
+	form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	int ch;
+
+	while((ch=wgetch(win)) != '\n')
+	{
+	
+		switch(ch)
+		{
+			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
+			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
+			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+		
+			default: form_driver(form,ch); break;
+		}
+	
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+	
+	strcpy(new_name, field_buffer(test[0],0));
+
+	int new_name_ind = strlen(new_name) -1;
+	
+	while(new_name_ind>= 0 && isspace(new_name[new_name_ind]))
+	{
+		new_name[new_name_ind] = '\0';
+		new_name_ind--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+	delwin(win);
+	
+	
+
+	clear();	/////////////////////////
+	
+	
+	test[0] = new_field(1, 38, 0,0,0,0);
+	set_field_buffer(test[0], 0, editing[1]);
+	form = new_form(test);
+	wclear(win_name);
+	
+	
+	
+	wprintw(win_name, "Please enter the new comment");
+	wrefresh(win_name);
+	
+	win = newwin(5,40,4,0);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+	
+	post_form(form);
+
+	wrefresh(win);
+
+	form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	
+
+	while((ch=wgetch(win)) != '\n')
+	{
+	
+		switch(ch)
+		{
+			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
+			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
+			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+		
+			default: form_driver(form,ch); break;
+		}
+	
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+	
+	strcpy(new_comment, field_buffer(test[0],0));
+	
+	int new_comment_ind = strlen(new_comment) -1;
+	
+	while(new_comment_ind>= 0 && isspace(new_comment[new_comment_ind]))
+	{
+		new_comment[new_comment_ind] = '\0';
+		new_comment_ind--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+	delwin(win);
+	delwin(win_name);
+	
+	
 	
 	
 	clear();
-	printw("Please enter the new comment\n");  //설명 새로 받기
-	printw("Your previous comment is: \n");
-	printw("%s\n>>", editing[1]);
 	refresh();
-	getstr(new_comment);
 	
 	
 	char command2[200];
@@ -752,6 +894,7 @@ void smbedit()  //삼바 수정
 
 void smbdel() //삼바 삭제
 {
+	clear();
 	int config_num = 0;
 	
 	system("./NASA/SambaConf/searchlist.sh");
@@ -894,7 +1037,11 @@ void smbdel() //삼바 삭제
 	{	
 		char* key = keyname(input);
 		if(input == KEY_F(5)||input == KEY_LEFT)    //F5 누르면 나감
+		{
+			clear();
+			refresh();
 			return;
+		}
 		else if (key[0] == '^' && key[1] == 'E') {
           		endwin();
 			exit(0);
