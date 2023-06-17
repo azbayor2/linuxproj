@@ -7,4 +7,4 @@ password1=$2
 
  
 #사용자 추가
-smbpasswd -a $user < <(echo -e "$password1\n$password1") > /dev/null 2>&1
+smbpasswd -a $user < <(echo -e "$password1\n$password1") > /dev/null 2> "./NASA/UserConf/error.tmp"
