@@ -345,17 +345,34 @@ void setnetwork() // 네트워크 설정
 	while((ch=wgetch(win)) != '\n')
 	{
 
+		char* key = keyname(ch);
 		
-		
-		
-		switch(ch)
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
 		{
-			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
-			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
-			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+          		endwin();
+			exit(0);
+		}
 		
-			default: if(isdigit(ch) || ch=='.' || ch=='/') form_driver(form,ch); break;
-		}	
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else if(isdigit(ch) || ch=='.' || ch=='/')
+			form_driver(form, ch);
+			
+	
 
 		wrefresh(win);
 
@@ -421,17 +438,34 @@ void setnetwork() // 네트워크 설정
 	while((ch=wgetch(win)) != '\n')
 	{
 
+		char* key = keyname(ch);
 		
-		
-		
-		switch(ch)
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
 		{
-			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
-			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
-			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+          		endwin();
+			exit(0);
+		}
 		
-			default: if(isdigit(ch) || ch=='.') form_driver(form,ch); break;
-		}	
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else if(isdigit(ch) || ch=='.')
+			form_driver(form, ch);
+			
+	
 
 		wrefresh(win);
 
@@ -497,17 +531,34 @@ void setnetwork() // 네트워크 설정
 	while((ch=wgetch(win)) != '\n')
 	{
 
+		char* key = keyname(ch);
 		
-		
-		
-		switch(ch)
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
 		{
-			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
-			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
-			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+          		endwin();
+			exit(0);
+		}
 		
-			default: if(isdigit(ch) || ch=='.') form_driver(form,ch); break;
-		}	
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else if(isdigit(ch) || ch=='.')
+			form_driver(form, ch);
+			
+	
 
 		wrefresh(win);
 

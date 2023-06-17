@@ -762,16 +762,36 @@ void smbedit()  //삼바 수정
 
 	while((ch=wgetch(win)) != '\n')
 	{
-	
-		switch(ch)
-		{
-			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
-			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
-			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+
+		char* key = keyname(ch);
 		
-			default: form_driver(form,ch); break;
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
+		{
+          		endwin();
+			exit(0);
 		}
+		
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else
+			form_driver(form, ch);
+			
 	
+
 		wrefresh(win);
 
 
@@ -827,16 +847,36 @@ void smbedit()  //삼바 수정
 
 	while((ch=wgetch(win)) != '\n')
 	{
-	
-		switch(ch)
-		{
-			case KEY_LEFT: form_driver(form, REQ_LEFT_CHAR); break;
-			case KEY_RIGHT: form_driver(form, REQ_RIGHT_CHAR); break;
-			case KEY_BACKSPACE: form_driver(form, REQ_DEL_PREV); break;
+
+		char* key = keyname(ch);
 		
-			default: form_driver(form,ch); break;
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
+		{
+          		endwin();
+			exit(0);
 		}
+		
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else
+			form_driver(form, ch);
+			
 	
+
 		wrefresh(win);
 
 
@@ -874,7 +914,7 @@ void smbedit()  //삼바 수정
 	
 	char command3[200];
 	
-	sprintf(command3, "./NASA/SambaConf/smbadd.sh \"%s\" \"%s\" \"%s\"", new_name, new_comment, previous_drive_path);
+	sprintf(command3, "./NASA/SambaConf/smbadd.sh \"%s\" \"%s\" \"%s\"", new_name, new_comment, 		previous_drive_path);
 	system(command3);
 	
 	system("./NASA/SambaConf/cleartmp.sh > /dev/null 2>&1");
