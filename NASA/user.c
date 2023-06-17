@@ -131,9 +131,192 @@ void user_menu()
 
 
 void adduser() // 네트워크 설정
-{	char user_name[100];
+{	
+
+
+
+	cbreak();
+	noecho();
+
+
+	char user_name[100];
 	char user_psd[100];
 	
+	FIELD *test[2];
+	FORM *form;
+
+	test[0] = new_field(1,38,0,0,0,0);
+	test[1] = NULL;
+
+	//set_field_buffer(test[0], 0, editing[0]);
+	//field_opts_on(test[0], O_EDIT);
+	//field_opts_on(test[0], O_VISIBLE);
+	field_opts_off(test[0], O_STATIC);
+	set_field_just(test[0], JUSTIFY_LEFT);
+
+	form = new_form(test);
+
+	WINDOW *win = newwin(5,40,4,0);
+	WINDOW *win_name = newwin(2,40,0,1);
+	wprintw(win_name, "Please enter your Network User's name");
+	wrefresh(win_name);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+
+	post_form(form);
+
+	wrefresh(win);
+
+	form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	int ch;
+
+	while((ch=wgetch(win)) != '\n')
+	{
+
+		char* key = keyname(ch);
+		
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
+		{
+          		endwin();
+			exit(0);
+		}
+		
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else
+			form_driver(form, ch);
+			
+	
+
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+	
+	strcpy(user_name, field_buffer(test[0],0));
+
+	int user_name_ind = strlen(user_name) -1;
+	
+	while(user_name_ind>= 0 && isspace(user_name[user_name_ind]))
+	{
+		user_name[user_name_ind] = '\0';
+		user_name_ind--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+	delwin(win);
+	
+	
+
+	clear();	/////////////////////////
+	
+	
+	test[0] = new_field(1, 38, 0,0,0,0);
+	//set_field_buffer(test[0], 0, editing[1]);
+	field_opts_off(test[0], O_PUBLIC);
+	form = new_form(test);
+	wclear(win_name);
+	
+	
+	
+	wprintw(win_name, "Please enter your Network user's password");
+	wrefresh(win_name);
+	
+	win = newwin(5,40,4,0);
+	keypad(win, true);
+	set_form_win(form, win);
+	set_form_sub(form, derwin(win, 1,38,2,1));
+	box(win,0,0);
+	
+	post_form(form);
+
+	wrefresh(win);
+
+	form_driver(form, REQ_END_LINE);
+	//form_driver(form, REQ_INS_MODE);
+
+
+	
+
+	while((ch=wgetch(win)) != '\n')
+	{
+
+		char* key = keyname(ch);
+		
+		if(ch==KEY_LEFT)
+			form_driver(form,REQ_LEFT_CHAR);
+			
+		else if(ch==KEY_RIGHT)
+			form_driver(form, REQ_RIGHT_CHAR);
+			
+		else if(ch==KEY_BACKSPACE)
+			form_driver(form, REQ_DEL_PREV);
+			
+		else if (key[0] == '^' && key[1] == 'E') 
+		{
+          		endwin();
+			exit(0);
+		}
+		
+		else if(ch == KEY_F(5))
+		{
+			clear();
+			refresh();
+			break;
+		}
+			
+		else
+			form_driver(form, ch);
+			
+	
+
+		wrefresh(win);
+
+
+	}
+
+	form_driver(form, REQ_VALIDATION);
+	
+	strcpy(user_psd, field_buffer(test[0],0));
+	
+	int user_psd_ind = strlen(user_psd) -1;
+	
+	while(user_psd_ind>= 0 && isspace(user_psd[user_psd_ind]))
+	{
+		user_psd[user_psd_ind] = '\0';
+		user_psd_ind--;
+	}
+	
+	unpost_form(form);
+	free_form(form);
+	free_field(test[0]);
+	delwin(win);
+	delwin(win_name);
+	
+	/*
 	
 	printw("Please enter your Network User's name\n>>");
 	echo();
@@ -152,6 +335,8 @@ void adduser() // 네트워크 설정
 	
 	cbreak();
 	noecho();
+	
+	*/
 	
 	char command[200];
 	
