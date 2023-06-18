@@ -1,6 +1,11 @@
 사용 설명서:
 
 
+
+1. 컴파일:
+ ./NASA/ 로 
+
+
 Main Menu
 
  -Network Settings
