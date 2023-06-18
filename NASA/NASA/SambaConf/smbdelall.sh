@@ -10,12 +10,12 @@ elif [ $check == 1 ]; then
 	firstline=$(head -n 1 "$filename")
 	delline=`expr $firstline - 1`
 	endline=`expr $delline + 11`
-       	sed -i "$delline,${endline}d" ./NASA/SambaConf/smb.conf
+       	sed -i "$delline,${endline}d" /etc/samba/smb.conf
 else
 	firstline=$(head -n 1 "$filename")
 	lastline=$(tail -n 1 "$filename")
 	delline=`expr $firstline - 1`
 	endline=`expr $lastline + 10`
-	sed -i "$delline,${endline}d" ./NASA/SambaConf/smb.conf
+	sed -i "$delline,${endline}d" /etc/samba/smb.conf
 fi
 

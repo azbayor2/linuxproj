@@ -4,7 +4,7 @@ path='./NASA/SambaConf/'
 
 
 # "#!@#" 문자열 행 저장
-grep -n '#!@#' ${path}smb.conf > ${path}slist.tmp
+grep -n '#!@#' /etc/samba/smb.conf > ${path}slist.tmp
 
 # 앞에 번호만 저장
 cut -d ':' -f 1 ${path}slist.tmp > ${path}slist2.tmp
@@ -20,7 +20,7 @@ do
 	templine=`sed -n "${i}p" ${path}slist2.tmp`
 	templine=`expr $templine + 3`
 	#echo $templine
-	sed -n "$templine s/^.\{9\}\(.*\)/\1/p" ${path}smb.conf >> ${path}smb_drive_path.tmp
+	sed -n "$templine s/^.\{9\}\(.*\)/\1/p" /etc/samba/smb.conf >> ${path}smb_drive_path.tmp
 	
 done
 
@@ -33,7 +33,7 @@ for ((i=1 ; i < $numlines+1 ; i++));
 do
 	nameline=`sed -n ${i}p ${path}slist2.tmp`
 	nameline=`expr $nameline + 1`
-	sed -n ${nameline}p ${path}smb.conf >> ${path}tempshow.tmp
+	sed -n ${nameline}p /etc/samba/smb.conf >> ${path}tempshow.tmp
 
 done
 

@@ -3,7 +3,7 @@ beginline=`expr $selected_line - 1`
 endline=`expr $selected_line + 10`
 path="./NASA/SambaConf/"
 
-sed -n "$beginline,${endline}p" ${path}smb.conf > ${path}copiedfile.tmp
+sed -n "$beginline,${endline}p" /etc/samba/smb.conf > ${path}copiedfile.tmp
 
 rm needsedit.tmp > /dev/null 2>&1
 

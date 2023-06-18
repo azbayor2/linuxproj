@@ -62,7 +62,7 @@ void user_menu()
 		{
 			clear();
 			refresh();
-			break;
+			break;;
 		}
 		else if(input == KEY_F(7))
 		{
@@ -162,7 +162,7 @@ void adduser() // 네트워크 설정
 
 	WINDOW *win = newwin(5,40,4,0);
 	WINDOW *win_name = newwin(2,40,0,1);
-	wprintw(win_name, "Please enter your Network User's name");
+	wprintw(win_name, "Please enter the SAMBA user's ID");
 	wrefresh(win_name);
 	keypad(win, true);
 	set_form_win(form, win);
@@ -203,7 +203,7 @@ void adduser() // 네트워크 설정
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else
@@ -246,7 +246,7 @@ void adduser() // 네트워크 설정
 	
 	
 	
-	wprintw(win_name, "Please enter your Network user's password");
+	wprintw(win_name, "Please enter the SAMBA user's password");
 	wrefresh(win_name);
 	
 	win = newwin(5,40,4,0);
@@ -289,7 +289,7 @@ void adduser() // 네트워크 설정
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else

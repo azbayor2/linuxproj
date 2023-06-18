@@ -366,7 +366,7 @@ void setnetwork() // 네트워크 설정
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else if(isdigit(ch) || ch=='.' || ch=='/')
@@ -459,7 +459,7 @@ void setnetwork() // 네트워크 설정
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else if(isdigit(ch) || ch=='.')
@@ -552,7 +552,7 @@ void setnetwork() // 네트워크 설정
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else if(isdigit(ch) || ch=='.')

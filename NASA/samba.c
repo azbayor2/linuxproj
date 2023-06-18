@@ -468,7 +468,7 @@ void smbadd() // 삼바 추가
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else
@@ -553,7 +553,7 @@ void smbadd() // 삼바 추가
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else
@@ -970,7 +970,7 @@ void smbedit()  //삼바 수정
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else
@@ -1055,7 +1055,7 @@ void smbedit()  //삼바 수정
 		{
 			clear();
 			refresh();
-			break;
+			return;
 		}
 			
 		else

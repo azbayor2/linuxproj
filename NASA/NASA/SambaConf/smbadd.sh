@@ -20,6 +20,6 @@ sed -i "s/input2/$drivename/g" ./NASA/SambaConf/temp_conf.tmp #경로바꾸기
 
 sed -i "s@input3@$drivepath@g" ./NASA/SambaConf/temp_conf.tmp  #경로바꾸기
 
-cat ./NASA/SambaConf/temp_conf.tmp >> ./NASA/SambaConf/smb.conf  #경로바꾸기
+cat ./NASA/SambaConf/temp_conf.tmp >> /etc/samba/smb.conf  #경로바꾸기
 
 # temp_conf.dll

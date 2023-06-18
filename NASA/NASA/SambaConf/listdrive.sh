@@ -8,8 +8,8 @@ lsblk -o size,mountpoint | grep /media > ./NASA/SambaConf/dlist1.tmp
 
 #cat -b ./NASA/SambaConf/dlist1.tmp > ./NASA/SambaConf/dlist2.txt   #드라이브 목록에 행 번호를 더함. 출력 용도.
 
-cut -d ' ' -f 4 ./NASA/SambaConf/dlist1.tmp > ./NASA/SambaConf/mntpoint.tmp  #드라이브의 경로가 저장됨
-cut -d ' ' -f 3 ./NASA/SambaConf/dlist1.tmp > ./NASA/SambaConf/drive_cap.tmp
+cut -d ' ' -f 3 ./NASA/SambaConf/dlist1.tmp > ./NASA/SambaConf/mntpoint.tmp  #드라이브의 경로가 저장됨
+cut -d ' ' -f 2 ./NASA/SambaConf/dlist1.tmp > ./NASA/SambaConf/drive_cap.tmp
 cut -d '/' -f 4 ./NASA/SambaConf/dlist1.tmp > ./NASA/SambaConf/drive_name.tmp
 
 

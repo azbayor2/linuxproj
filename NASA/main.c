@@ -18,7 +18,7 @@ int main()     //메인 메뉴 출력 부분
 	
 	if(geteuid()!=0)
 	{
-		printw("\n\nThis Program requires Root Priviledge!\n\n");
+		printw("\n\nThis Program requires Root Privilege!\n\n");
 		printw("Please run as ROOT!\n\n\n\n");
 		printw("Press any key to Exit");
 		getch();
