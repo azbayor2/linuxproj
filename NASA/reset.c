@@ -7,7 +7,7 @@ void reset_all(){
 	
 			system("./NASA/NetworkConf/new_interface.sh");
 	
-			FILE *file1 = fopen("./NASA/NetworkConf/temp1_num.txt", "r");
+			FILE *file1 = fopen("./NASA/NetworkConf/temp1_num.tmp", "r");
 			if (file1 == NULL)
 			{
 				printw("An error has occured. Press any key to exit");
@@ -38,7 +38,7 @@ void reset_all(){
 		
 			fclose(file1);
 	
-			FILE *file2 = fopen("./NASA/NetworkConf/temp1.txt","r");
+			FILE *file2 = fopen("./NASA/NetworkConf/temp1.tmp","r");
 			if (file2 == NULL)
 			{
 				printw("An error has occured. Press any key to exit");
@@ -164,7 +164,7 @@ void reset_all(){
 	
 			char command[200];
 	
-			sprintf(command, "./NASA/NetworkConf/static.sh %s",int_name);
+			sprintf(command, "./NASA/NetworkConf/reset.sh %s",int_name);
 			system(command);
 	
 			printw("Done! Press any key to continue");
