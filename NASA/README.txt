@@ -3,7 +3,11 @@
 
 
 1. 컴파일:
- ./NASA/ 로 
+ 터미널에서 ./NASA/ (가장 상위 폴더의 NASA)로 이동한 후, make -f makefile 실행.
+ 루트 계정으로 실행하기 위해 sudo ./main.out 
+
+
+2. 메뉴 설명
 
 
 Main Menu
@@ -28,6 +32,8 @@ Main Menu
  -Exit: 프로그램 종료
 
 
+
+3. 키 설명
 
 
 이동방법- 상하 방향키: 위아래 움직이기
